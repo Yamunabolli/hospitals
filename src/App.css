@@ -1,0 +1,44 @@
+.HomeTemp{
+  background-image:url('https://images.pexels.com/photos/668300/pexels-photo-668300.jpeg?auto=compress&cs=tinysrgb&w=600');
+  background-size: cover;
+  height: 100vh;
+}
+.img{
+  background-image: url('C:\Users\ybolli\Downloads\pexels-expect-best-323705.jpg');
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+.Hsptl{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.center{
+  justify-content: center;
+}
+.loginCard{
+  display: initial;
+  justify-content: center;
+  text-align: center;
+  height: 9cm;
+  width: 14cm;
+  /* background-image: url('C:\Users\ybolli\Downloads\anton-8q-U8X1zkvI-unsplash.jpg'); */
+  background-size: 50%;
+  /* background-color: rgb(68, 124, 201); */
+}
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.MuiCard-root.loginCard.css-bhp9pd-MuiPaper-root-MuiCard-root {
+  background-color: rgb(248, 250, 253);
+
+}
+.sideNav{
+  background-color: aqua;
+  background-size: 100vh;
+}
+
+.link{
+  color: #00aae7!important;
+
+}
