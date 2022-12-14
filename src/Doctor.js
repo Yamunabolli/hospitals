@@ -31,12 +31,12 @@ import { Outlet } from 'react-router-dom';
 import BloodtypeOutlinedIcon from '@mui/icons-material/BloodtypeOutlined';import DemoComponent from './DemoComponent';
 import { useNavigate } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
-import Register from './Register';
 
 const drawerWidth = 200;
 
-export default function Dashboard() {
+export default function Doctor() {
     const pages = [];
+const settings = ['Profile', 'Logout'];
 
 const [value, setValue] = React.useState(0);
 
@@ -58,15 +58,11 @@ const nav = useNavigate()
     setAnchorElUser(null);
   };
 
-  const handle=()=>{
-    nav("/Dashboard/DemoComponent")
+  const handledemo=()=>{
+    nav("/Doctor/PatientList")
   }
   const handleSample=()=>{
-    nav("/Dashboard/Register")
-  }
-
-  const handleLogout =()=>{
-    nav("/")
+    nav("/Dashboard/Patients")
   }
 
   function Copyright(props) {
@@ -104,29 +100,9 @@ const nav = useNavigate()
           >
             Hospital
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-          <BloodtypeOutlinedIcon sx={{ display: {  md: 'flex' }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/Dashboard"
-            sx={{
-              mr: 1,
-              display: {  md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            Hospital
-          </Typography>
-          </Box>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            {/* <IconButton
+            <IconButton
               size="large"
               aria-label="account of current user"
               aria-controls="menu-appbar"
@@ -135,7 +111,7 @@ const nav = useNavigate()
               color="inherit"
             >
               <MenuIcon />
-            </IconButton> */}
+            </IconButton>
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
@@ -161,8 +137,8 @@ const nav = useNavigate()
               ))} */}
             </Menu>
           </Box>
-          {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
-          {/* <Typography
+          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <Typography
             variant="h5"
             noWrap
             component="a"
@@ -179,12 +155,8 @@ const nav = useNavigate()
             }}
           >
             LOGO
-
-          </Typography> */}
-
-
+          </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
- 
             {pages.map((page) => (
               <Button
                 key={page}
@@ -199,7 +171,7 @@ const nav = useNavigate()
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="y" />
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
             <Menu
@@ -218,13 +190,11 @@ const nav = useNavigate()
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {/* {settings.map((setting) => ( */}
-              {/* key={setting} onClick={handleCloseUserMenu} */}
-       
-                <MenuItem >
-                  <Button textAlign="center" onClick={handleLogout}>Logout</Button>
+              {settings.map((setting) => (
+                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
-              {/* ))} */}
+              ))}
             </Menu>
           </Box>
         </Toolbar>
@@ -239,13 +209,10 @@ const nav = useNavigate()
       >
         <Toolbar />
         <Box sx={{ overflow: 'auto' }}>
-          {/* <Button variant="text" onClick={handledemo}>DemoComponent</Button> */}
-          <ul>
-            <List>
-          <Button variant="text"  onClick={handleSample}>ADDUSER</Button>
-          <Button variant="text"  onClick={handle}>example</Button>
-          </List>
-          </ul>
+          <List>
+          <Button variant="text" onClick={handledemo}>List of Patients</Button>
+          {/* <Button variant="text" onClick={handleSample}>Patients</Button> */}
+
             {/* {['DemoComponent', 'Dialyaccount'].map((text, index) => (
               <ListItem key={text} disablePadding>
                 <ListItemButton>
@@ -257,6 +224,7 @@ const nav = useNavigate()
               </ListItem>
             ))} */}
 
+          </List>
           {/* <Divider /> */}
           
         </Box>
@@ -265,10 +233,11 @@ const nav = useNavigate()
    
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
-       
-        
+        <Typography paragraph>
+        </Typography>
+        <Typography paragraph>
+        </Typography>
         <Typography>
-
       <Outlet />
         </Typography>
      

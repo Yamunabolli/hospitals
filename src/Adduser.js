@@ -1,212 +1,139 @@
-import React, { useState, useEffect } from "react";
-import { useFormik } from "formik";
-import * as yup from "yup";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Card from "@mui/material/Card";
-import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import Stack from "@mui/material/Stack";
-import StarIcon from '@mui/icons-material/Star';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormLabel from '@mui/material/FormLabel';
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Patients from "./Patients";
-import RestartAltIcon from '@mui/icons-material/RestartAlt';
-import DeleteIcon from '@mui/icons-material/Delete';
+import React from 'react'
 
-const validationSchema = yup.object({
-  Firstname: yup
-  .string()
-  // .test('Must be exactly 5 characters', val => val.length === 5)
-   .trim()
-    .min(2, "Please enter Your FirstName")
-    .max(50, "Too Long!")
-    .matches(/^[a-zA-Z ]{2,50}$/, "Please enter characters only")
-    .required("Required"),
-    Middlename: yup
-    .string()
-    .trim()
-    .min(2, "Please enter Your LastName")
-    .max(50, "Too Long!")
-    .matches(/^[a-zA-Z ]{2,50}$/, "Please enter characters only"),
-    // .required("Required"),
-
-    LastName: yup
-    .string()
-    .trim()
-    .min(2, "Please enter Your LastName")
-    .max(50, "Too Long!")
-    .matches(/^[a-zA-Z ]{2,50}$/, "Please enter characters only")
-    .required("Required"),
-    Email: yup
-    .string("Enter your email")
-    .trim()
-    .email("Enter a valid email")
-    .required("Email is required"),
-    PhoneNumber: yup
-    .string()
-    .max(10, "Please enter valid Phone_No")
-    .matches(
-      /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9]{10,10})+$/i,
-      "Please enter valid Phone_No"
-    )
-    .required("Required"),
-    AlternativeNumber: yup
-    .string()
-    .max(10, "Please enter valid Phone_No")
-    .matches(
-      /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9]{10,10})+$/i,
-      "Please enter valid Phone_No"
-    ),
-    // .required("Required"),
-    Addressline1: yup
-    .string()
-    .trim()
-    .min(3, "Please enter your address")
-    .max(50, "Too Long!")
-    .required("Required"),
-    Addressline2: yup
-    .string()
-    .trim()
-    .min(3, "Please enter your address")
-    .max(50, "Too Long!"),
-    // .required("Required"),
-    Pincode: yup
-    .string()
-    .max(6, "Please enter valid pincode")
-    .matches(
-      /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9]{6,6})+$/i,
-      "Please enter valid pincode"
-    )
-    .required("Required"),
-    City: yup
-    .string()
-    .trim()
-    .min(2, "Please enter city name")
-    .max(50, "Too Long!")
-    .matches(/^[a-zA-Z ]{2,50}$/, "Please enter characters only")
-    .required("Required"),
-    State: yup
-    .string()
-    .trim()
-    .min(2, "Please enter state name")
-    .max(50, "Too Long!")
-    .matches(/^[a-zA-Z ]{2,50}$/, "Please enter characters only")
-    .required("Required"),
-    Country: yup
-    .string()
-    .trim()
-    .min(2, "Please enter country name")
-    .max(50, "Too Long!")
-    .matches(/^[a-zA-Z ]{2,50}$/, "Please enter characters only")
-    .required("Required"),
-    Age: yup
-    .number()
-    // .string()
-    .min(1, "You must be at least 1 year")
-    .max(120, "You must be at most 120 years")
-    // .matches( /^[0-9]*$/, "Please enter characters only")
-    .required("Required"),
-    height: yup
-    .number(),
-    // .string()
-    // .min(1, "You must be at least 1 year")
-    // .max(120, "You must be at most 120 years")
-    // .matches( /^[0-9]*$/, "Please enter characters only")
-    // .required("Required"),
-    weight: yup
-    .number(),
-    // .string()
-    // .min(1, "You must be at least 1 year")
-    // .max(120, "You must be at most 120 years")
-    // .matches( /^[0-9]*$/, "Please enter characters only")
-    // .required("Required"),
-
-    Gender: yup
-    .string()
-    .required("Required"),
-    Role: yup
-    .string()
-    .required("Required"),
-    Bloodgroup: yup
-    .string(),
-    // .required("Required"),
-    username: yup
-    .string()
-    .trim()
-    .min(2, "Please enter Your UserName")
-    .max(50, "Too Long!")
-    .matches(/^[a-zA-Z ]{2,50}$/, "Please enter characters only")
-    .required("Required"),
-    password: yup
-    .string('Enter your password')
-    .min(8, 'minimum 8 characters length')
-    .matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/, "Please set the strong password")
-    .required('Password is required'),
-});
-
-const Register = () => {
-  var formik = useFormik({
-    initialValues: {
-      Firstname: "",
-      Middlename:"",
-      LastName: "",
-      Email: "",
-      PhoneNumber: "",
-      AlternativeNumber:"",
-      Age: "",
-      height:"",
-      weight:"",
-      Bloodgroup:"",
-      Pincode: "",
-      City: "",
-      State:"",
-      Country:"",
-      Addressline1: "",
-      Addressline2:"",
-      Gender: "",
-      Role:"",
-      username:"",
-      password:""
-    },
-    validationSchema: validationSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 4));
-      console.log("formik");
-    },
-  });
-
-
-  const [data, setData] = useState([]);
-
-  const submitHandler = () => {
-    setData((prevFormValues) => [...prevFormValues, formik.values]);
-    console.log(data);
-    console.log(formik.values);
-  };
-
-  useEffect(() => {
-    localStorage.setItem("initialValues", JSON.stringify(data));
-  }, [data]);
-
-const handleReset =()=>{
-
-}
-
+export default function Adduser() {
+    const validationSchema = yup.object({
+        Firstname: yup
+        .string()
+        // .test('Must be exactly 5 characters', val => val.length === 5)
+         .trim()
+          .min(2, "Please enter Your FirstName")
+          .max(50, "Too Long!")
+          .matches(/^[a-zA-Z ]{2,50}$/, "Please enter characters only")
+          .required("Required"),
+          Middlename: yup
+          .string()
+          .trim()
+          .min(2, "Please enter Your LastName")
+          .max(50, "Too Long!")
+          .matches(/^[a-zA-Z ]{2,50}$/, "Please enter characters only"),
+          // .required("Required"),
+      
+          LastName: yup
+          .string()
+          .trim()
+          .min(2, "Please enter Your LastName")
+          .max(50, "Too Long!")
+          .matches(/^[a-zA-Z ]{2,50}$/, "Please enter characters only")
+          .required("Required"),
+          Email: yup
+          .string("Enter your email")
+          .trim()
+          .email("Enter a valid email")
+          .required("Email is required"),
+          PhoneNumber: yup
+          .string()
+          .max(10, "Please enter valid Phone_No")
+          .matches(
+            /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9]{10,10})+$/i,
+            "Please enter valid Phone_No"
+          )
+          .required("Required"),
+          AlternativeNumber: yup
+          .string()
+          .max(10, "Please enter valid Phone_No")
+          .matches(
+            /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9]{10,10})+$/i,
+            "Please enter valid Phone_No"
+          ),
+          // .required("Required"),
+          Addressline1: yup
+          .string()
+          .trim()
+          .min(3, "Please enter your address")
+          .max(50, "Too Long!")
+          .required("Required"),
+          Addressline2: yup
+          .string()
+          .trim()
+          .min(3, "Please enter your address")
+          .max(50, "Too Long!"),
+          // .required("Required"),
+          Pincode: yup
+          .string()
+          .max(6, "Please enter valid pincode")
+          .matches(
+            /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9]{6,6})+$/i,
+            "Please enter valid pincode"
+          )
+          .required("Required"),
+          City: yup
+          .string()
+          .trim()
+          .min(2, "Please enter city name")
+          .max(50, "Too Long!")
+          .matches(/^[a-zA-Z ]{2,50}$/, "Please enter characters only")
+          .required("Required"),
+          State: yup
+          .string()
+          .trim()
+          .min(2, "Please enter state name")
+          .max(50, "Too Long!")
+          .matches(/^[a-zA-Z ]{2,50}$/, "Please enter characters only")
+          .required("Required"),
+          Country: yup
+          .string()
+          .trim()
+          .min(2, "Please enter country name")
+          .max(50, "Too Long!")
+          .matches(/^[a-zA-Z ]{2,50}$/, "Please enter characters only")
+          .required("Required"),
+          Age: yup
+          .number()
+          // .string()
+          .min(1, "You must be at least 1 year")
+          .max(120, "You must be at most 120 years")
+          // .matches( /^[0-9]*$/, "Please enter characters only")
+          .required("Required"),
+          height: yup
+          .number(),
+          // .string()
+          // .min(1, "You must be at least 1 year")
+          // .max(120, "You must be at most 120 years")
+          // .matches( /^[0-9]*$/, "Please enter characters only")
+          // .required("Required"),
+          weight: yup
+          .number(),
+          // .string()
+          // .min(1, "You must be at least 1 year")
+          // .max(120, "You must be at most 120 years")
+          // .matches( /^[0-9]*$/, "Please enter characters only")
+          // .required("Required"),
+      
+          Gender: yup
+          .string()
+          .required("Required"),
+          Role: yup
+          .string()
+          .required("Required"),
+          Bloodgroup: yup
+          .string(),
+          // .required("Required"),
+          username: yup
+          .string()
+          .trim()
+          .min(2, "Please enter Your UserName")
+          .max(50, "Too Long!")
+          .matches(/^[a-zA-Z ]{2,50}$/, "Please enter characters only")
+          .required("Required"),
+          password: yup
+          .string('Enter your password')
+          .min(8, 'minimum 8 characters length')
+          .matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/, "Please set the strong password")
+          .required('Password is required'),
+      });
   return (
-    <>
-    <div >
-    <Accordion>
+    <div>
+        <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -599,32 +526,6 @@ const handleReset =()=>{
       </Card>
       </AccordionDetails>
       </Accordion>
-      <div>
-       <Stack direction="row" spacing={3} >
- <Box
-      component="form"
-      sx={{
-        '& > :not(style)': { m: 1, width: '25ch' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <TextField id="outlined-basic" label="Patient name" variant="outlined" />
-      <TextField id="outlined-basic" label="Token number" variant="outlined" />
-    </Box>
-      <Button variant="contained" color="primary" style={{'width':'20ch', 'height':'7ch','marginTop':'8px'}}>
-        search
-      </Button>
-      <Button variant="contained" color="primary" style={{'width':'20ch', 'height':'7ch','marginTop':'8px'}}>
-        Reset
-      </Button>
-      </Stack>
     </div>
-    <Patients/>
-    </div>
-    </>
-  );
-};
-
-export default Register;
-
+  )
+}

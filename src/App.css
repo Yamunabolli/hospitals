@@ -21,9 +21,9 @@
 }
 .loginCard{
   display: initial;
-  justify-content: center;
+  justify-content: auto;
   text-align: center;
-  height: 9cm;
+  height: 10cm;
   width: 14cm;
   /* background-image: url('C:\Users\ybolli\Downloads\anton-8q-U8X1zkvI-unsplash.jpg'); */
   background-size: 50%;
@@ -31,7 +31,7 @@
 }
 .MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.MuiCard-root.loginCard.css-bhp9pd-MuiPaper-root-MuiCard-root {
   background-color: rgb(248, 250, 253);
-
+  border-radius: 30px;
 }
 .sideNav{
   background-color: aqua;
@@ -41,4 +41,105 @@
 .link{
   color: #00aae7!important;
 
+}
+.forgotimg{
+  background-image: url('C:\Users\ybolli\Downloads\pexels-expect-best-323705.jpg');
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.forgotcard{
+  display: initial;
+  justify-content: center;
+  text-align: center;
+  height: 6cm;
+  width: 10cm;
+  background-size: 50%;
+}
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.MuiCard-root.forgotcard.css-bhp9pd-MuiPaper-root-MuiCard-root {
+  background-color: rgb(248, 250, 253);
+
+}
+
+.otpcard{
+  display: initial;
+  justify-content: center;
+  text-align: center;
+  height: 10cm;
+  width: 10cm;
+  background-size: 50%;
+}
+.otpimg{
+  background-image: url('C:\Users\ybolli\Downloads\pexels-expect-best-323705.jpg');
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+}
+.MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-6.css-1osj8n2-MuiGrid-root {
+  display: flex;
+  justify-content: end;
+}
+.MuiButton-containedPrimary {
+  color: #fff;
+  background-color: #3f51b5;
+  width: 125px;
+  height: 55px;
+}
+
+
+/* REGISTER CSS */
+.cardSize{
+  width:max-content;
+  height: max-content;
+  /* margin-top: 5%; */
+  padding-left: 1%;
+  /* display:block;
+  justify-content:right; */
+  /* background-image: url('C:\Users\mpediredla\Downloads\annie-spratt-pKpipZVVEC0-unsplash.jpg');
+  
+  background-size:cover;
+  height:100vh; */
+
+}
+
+.regimg{
+  /* background-image: url('https://img.freepik.com/premium-photo/abstract-blurred-hospital-room-interior-background_293060-9093.jpg?w=2000'); */
+    background-size:cover;
+  height:100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.css-bhp9pd-MuiPaper-root-MuiCard-root {
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.87);
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 4px;
+  box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+  overflow: hidden;
+  background: transparent !important; 
+  /* opacity: 20; */
+}
+.MuiFormHelperText-root.Mui-error {
+  color: #f44336;
+  /* display: none; */
+}
+.MuiInputLabel-animated {
+  transition: color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms,transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+  color: black !important;
+  /* color:rgba(0, 0, 0, 0.87); */
+}
+
+.icon{
+  margin-top: -10%;
+  font-size: small !important;
+  color: red;
+}
+.MuiFormHelperText-root Mui-error MuiFormHelperText-filled{
+  display: none !important;
 }
